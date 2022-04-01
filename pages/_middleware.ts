@@ -4,7 +4,7 @@ export default function middleware(req: NextRequest) {
   const url = req.nextUrl.clone()
   // Get hostname (e.g. vercel.com, test.vercel.app, etc.)
   const hostname = req.headers.get('host')
-
+  console.log(`hostname is ${hostname}`);
   // If localhost, assign the host value manually
   // If prod, get the custom domain/subdomain value by removing the root URL
   // (in the case of "test.vercel.app", "vercel.app" is the root URL)
@@ -12,14 +12,14 @@ export default function middleware(req: NextRequest) {
     process.env.NODE_ENV == 'production'
       ? hostname.replace(`.${process.env.ROOT_URL}`, '')
       : process.env.CURR_HOST
-
+  console.log(`currentHost is ${currentHost}`)
   // Prevent security issues – users should not be able to canonically access
   // the pages/sites folder and its respective contents. This can also be done
   // via rewrites to a custom 404 page
   if (url.pathname.startsWith(`/_sites`)) {
     return new Response(null, { status: 404 })
   }
-
+  console.log(`url pathname is ${url.pathname}`);
   if (
     !url.pathname.includes('.') && // exclude all files in the public folder
     !url.pathname.startsWith('/api') // exclude all API routes

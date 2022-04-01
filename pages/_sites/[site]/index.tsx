@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { Layout, Page, Text, Link, List } from '@vercel/examples-ui'
 
 export default function Index(props) {
+  console.log(`props in Inde is ${JSON.stringify(props)}`);
   const router = useRouter()
   if (router.isFallback) {
     return (
@@ -34,25 +35,25 @@ export default function Index(props) {
       </Text>
       <List>
         <li>
-          <Link href="https://subdomain-1.vercel.sh">
-            subdomain-1.vercel.sh
+          <Link href="hostname-rewrites-gamma.vercel.app">
+            hostname-rewrites-gamma.vercel.app
           </Link>
         </li>
         <li>
-          <Link href="https://subdomain-2.vercel.sh">
-            subdomain-2.vercel.sh
+          <Link href="hostname-rewrites-beta.vercel.app">
+            hostname-rewrites-beta.vercel.app
           </Link>
         </li>
         <li>
-          <Link href="https://subdomain-3.vercel.sh">
-            subdomain-3.vercel.sh
+          <Link href="hostname-rewrites-theta.vercel.app">
+            hostname-rewrites-theta.vercel.app
           </Link>
         </li>
         <li>
           <Link href="https://custom-domain-1.com">custom-domain-1.com</Link>{' '}
           (maps to{' '}
-          <Link href="https://subdomain-1.vercel.sh">
-            subdomain-1.vercel.sh
+          <Link href="hostname-rewrites-gamma.vercel.app">
+            hostname-rewrites-gamma.vercel.app
           </Link>
           )
         </li>
@@ -67,19 +68,19 @@ const mockDB = [
   {
     name: 'Site 1',
     description: 'Subdomain + custom domain',
-    subdomain: 'subdomain-1',
+    subdomain: 'hostname-rewrites-gamma',
     customDomain: 'custom-domain-1.com',
   },
   {
     name: 'Site 2',
     description: 'Subdomain only',
-    subdomain: 'subdomain-2',
+    subdomain: 'hostname-rewrites-theta',
     customDomain: null,
   },
   {
     name: 'Site 3',
     description: 'Subdomain only',
-    subdomain: 'subdomain-3',
+    subdomain: 'hostname-rewrites-beta',
     customDomain: null,
   },
 ]
@@ -100,13 +101,17 @@ export async function getStaticPaths() {
       return { params: { site: item.customDomain } }
     }),
   ]
+  console.log(`paths are ${JSON.stringify(paths)}`)
   return {
     paths: paths,
     fallback: true, // fallback true allows sites to be generated using ISR
   }
 }
 
-export async function getStaticProps({ params: { site } }) {
+export async function getStaticProps(x) {
+  console.log(`x in getStaticProps is ${JSON.stringify(x)}`)
+  const { params: { site } } = x
+  console.log(`Inside getStaticProps site is ${site}`);
   // check if site is a custom domain or a subdomain
   const customDomain = site.includes('.') ? true : false
 
