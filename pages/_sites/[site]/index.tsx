@@ -35,24 +35,24 @@ export default function Index(props) {
       </Text>
       <List>
         <li>
-          <Link href="hostname-rewrites-gamma.vercel.app">
+          <Link href="https://hostname-rewrites-gamma.vercel.app">
             hostname-rewrites-gamma.vercel.app
           </Link>
         </li>
         <li>
-          <Link href="hostname-rewrites-beta.vercel.app">
+          <Link href="https://hostname-rewrites-beta.vercel.app">
             hostname-rewrites-beta.vercel.app
           </Link>
         </li>
         <li>
-          <Link href="hostname-rewrites-theta.vercel.app">
+          <Link href="https://hostname-rewrites-theta.vercel.app">
             hostname-rewrites-theta.vercel.app
           </Link>
         </li>
         <li>
           <Link href="https://custom-domain-1.com">custom-domain-1.com</Link>{' '}
           (maps to{' '}
-          <Link href="hostname-rewrites-gamma.vercel.app">
+          <Link href="https://hostname-rewrites-gamma.vercel.app">
             hostname-rewrites-gamma.vercel.app
           </Link>
           )
